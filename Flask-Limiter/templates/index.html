@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disfood</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .container {
+            background-image: url("{{ url_for('static', filename='images/fondo.jpg') }}");
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sección de inicio de sesión -->
+        <div id="login-section" class="form-section active">
+            <h2>Iniciar Sesión</h2>
+            <!-- GIF para la sección de inicio de sesión -->
+            <img src="{{ url_for('static', filename='images/gatito.gif') }}" alt="GIF de inicio de sesión" class="gif-image">
+            <form id="login-form">
+                <label for="login-username">Nombre de Usuario</label>
+                <input type="text" id="login-username" name="username" required>
+
+                <label for="login-password">Contraseña</label>
+                <input type="password" id="login-password" name="password" required>
+
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+            <p>¿No tienes una cuenta? <a href="#" id="show-register">Regístrate</a></p>
+        </div>
+
+        <!-- Sección de registro -->
+        <div id="register-section" class="form-section">
+            <h2>Registro de Usuario</h2>
+            <!-- GIF para la sección de registro -->
+            <img src="{{ url_for('static', filename='images/pug.gif') }}" alt="GIF de registro" class="gif-image">
+            <form id="register-form">
+                <label for="register-username">Nombre de Usuario</label>
+                <input type="text" id="register-username" name="username" required>
+
+                <label for="register-password">Contraseña</label>
+                <input type="password" id="register-password" name="password" required>
+
+                <button type="submit">Registrar</button>
+            </form>
+            <p>¿Ya tienes una cuenta? <a href="#" id="show-login">Inicia sesión</a></p>
+        </div>
+
+        <!-- Sección de Bienvenida (protegida) -->
+        <div id="welcome-section" class="form-section">
+            <h2>Bienvenido</h2>
+            <p id="welcome-message"></p>
+            <button id="logout-btn">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script>
+        // Aquí va el código JavaScript para manejar el inicio de sesión, registro y cierre de sesión
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('access_token', data.access_token);
+                localStorage.setItem('refresh_token', data.refresh_token);
+                document.getElementById('welcome-message').innerText = `Bienvenido, ${username}!`;
+                toggleSections('welcome-section');
+            } else {
+                const error = await response.json();
+                alert(error.msg);
+            }
+        });
+
+        document.getElementById('register-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                alert("Usuario registrado exitosamente.");
+                toggleSections('login-section');
+            } else {
+                const error = await response.json();
+                alert(error.msg);
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            toggleSections('login-section');
+        });
+
+        document.getElementById('show-register').addEventListener('click', function() {
+            toggleSections('register-section');
+        });
+
+        document.getElementById('show-login').addEventListener('click', function() {
+            toggleSections('login-section');
+        });
+
+        function toggleSections(activeSection) {
+            const sections = document.querySelectorAll('.form-section');
+            sections.forEach(section => {
+                if (section.id === activeSection) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

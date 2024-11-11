@@ -1,0 +1,114 @@
+/* Estilo general del cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Color de fondo suave */
+    margin: 0; /* Sin márgenes */
+    padding: 0; /* Sin relleno */
+}
+
+/* Estilo del contenedor principal */
+.container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+
+/* Estilo del encabezado h2 */
+h2 {
+    text-align: center; /* Centrando el texto */
+    color: #f1f1f1; /* Color del texto */
+}
+
+/* Estilo de los formularios */
+form {
+    display: flex; /* Usando Flexbox */
+    flex-direction: column; /* Dirección de los elementos en columna */
+}
+
+/* Estilo de las etiquetas */
+label {
+    margin-bottom: 5px; /* Espacio debajo de las etiquetas */
+    color: #fff3f3; /* Color del texto */
+}
+
+/* Estilo de los campos de entrada */
+input {
+    padding: 10px; /* Relleno interno */
+    margin-bottom: 15px; /* Espacio debajo de los campos */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 4px; /* Esquinas redondeadas */
+    transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+/* Estilo de los campos de entrada al recibir enfoque */
+input:focus {
+    border-color: #007BFF; /* Color de borde azul al enfocar */
+    outline: none; /* Sin borde de enfoque */
+}
+
+/* Estilo de los botones */
+button {
+    padding: 10px; /* Relleno interno */
+    background-color: #6f30e6; /* Fondo oscuro */
+    color: #dcd9e0; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor a puntero */
+    transition: background-color 0.3s; /* Transición suave para el fondo */
+}
+
+/* Estilo del botón al pasar el mouse */
+button:hover {
+    background-color: #301179; /* Fondo más claro al pasar el mouse */
+}
+
+/* Estilo de los párrafos */
+p {
+    text-align: center; /* Centrando el texto */
+}
+
+/* Estilo de los enlaces */
+a {
+    color: #007BFF; /* Color azul para los enlaces */
+    text-decoration: none; /* Sin subrayado */
+}
+
+/* Estilo de los enlaces al pasar el mouse */
+a:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+}
+
+/* Ocultar secciones que no están activas */
+.form-section {
+    display: none; /* No se muestran por defecto */
+}
+
+/* Mostrar la sección activa */
+.form-section.active {
+    display: block; /* Se muestra solo la sección activa */
+}
+
+/* Estilo para el botón de cerrar sesión */
+#logout-btn {
+    margin-top: 15px; /* Espacio superior */
+    background-color: #d9534f; /* Color rojo para el botón de cerrar sesión */
+}
+
+/* Estilo del botón de cerrar sesión al pasar el mouse */
+#logout-btn:hover {
+    background-color: #c9302c; /* Color más oscuro al pasar el mouse */
+}
+
+
+.gif-image {
+    display: block;
+    margin: 20px auto;
+    width: 150px;  /* Ajusta el tamaño del GIF */
+    height: auto;
+}
